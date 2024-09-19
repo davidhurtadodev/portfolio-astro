@@ -1,0 +1,200 @@
+ ---
+import fetchApi from '../lib/strapi';
+ import { Image } from 'astro:assets';
+ import davidImg from '../assets/images/david.png';
+ import Skills from './Skills.astro';
+ import codeVideoSrc from '../assets/videos/code-video.mp4';
+
+
+ const heroData = await fetchApi({
+  endpoint: 'hero', // the content type to fetch
+  wrappedByKey: 'data', // the key to unwrap the response
+});
+
+console.log({hero:heroData});
+---
+    
+<div class="hero-skills">
+    <section class="hero-inside">
+    <video autoplay muted loop id="codeVid">
+        <source src={codeVideoSrc} type="video/mp4" />
+    </video>
+    <div class="circle-img">
+        <div class="dev-container">
+        <Image src={davidImg} class="fluid-img" alt="David Hurtado" />
+        </div>
+    </div>
+    <div class="text-btn-container">
+        <h1>David Hurtado</h1>
+        <h2>Frontend web developer</h2>
+        <p class="intro">
+        Do you think it’s crazy to make a career switch from music to
+        software engineering? I can show you that it isn't. I'm a frontend
+        developer with a year of experience and a senior symphonic musician.
+        I specialize in the frontend of the Web and coding UI, and I am
+        passionate about creating visually stunning and user-friendly
+        interfaces. In my year of experience, I have worked making the
+        frontend of different websites from scratch and improving the
+        frontend of existing websites. I love working with React and
+        TypeScript. My background in music and my love of web development
+        have led me to a career in frontend development, where I am able to
+        combine my technical skills with my creative mindset. I've honed my
+        communication and teamwork skills in my work as a musician, and I
+        bring that same level of assertiveness and self-discipline to a
+        frontend developer role.
+        </p>
+        <div class="btn-icons">
+        <a href="#contactMe">
+            <button type="button" class="contact-btn primary-btn">
+            Contact me
+            </button>
+        </a>
+        <div class="git-in-container">
+            <div>
+            <a href="https://github.com/davidhurtadodev">
+                <i class="fa-brands fa-github pointer"></i>
+            </a>
+            </div>
+            <div>
+            <a href="https://linkedin.com/in/david-hurtado-g">
+                <i class="fa-brands fa-linkedin-in pointer"></i>
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </section>
+    <Skills />
+</div>
+
+    <style>
+        .hero-inside {
+  background-color: #353528;
+  padding: 15px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  z-index: -20;
+}
+.hero-skills {
+  position: relative;
+  z-index: 100;
+}
+.hero-inside h1 {
+  font-size: 30px;
+  font-weight: bold;
+}
+.hero-inside h2 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.hero-inside .intro {
+  margin-bottom: 20px;
+}
+.hero-inside p {
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.12px;
+}
+.btn-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+.hero-inside .fa-brands {
+  font-size: 30px;
+  margin: 15px 10px;
+}
+.hero-inside .circle-img {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  background-color: #66664d;
+  overflow: hidden;
+  margin: 0 auto 10px;
+}
+.hero-inside .dev-container {
+  width: 130px;
+  position: relative;
+  left: 4px;
+  top: 5px;
+}
+.hero-inside .git-in-container {
+  display: flex;
+}
+#codeVid {
+  position: absolute;
+  opacity: 0.04;
+  top: -20%;
+  width: 300%;
+  left: -35%;
+  z-index: -10;
+}
+@-moz-document url-prefix() {
+  #codeVid {
+    opacity: 0.03;
+  }
+}
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
+@media screen and (min-width: 992px) {
+  #codeVid {
+    width: 150%;
+    left: -15%;
+  }
+  .hero-inside {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 0;
+    justify-content: flex-end;
+  }
+  .hero-inside .text-btn-container {
+    text-align: left;
+    text-align: left;
+    width: 70%;
+    width: 56%;
+    margin: 6% 0 0 8vw;
+    max-width: 780px;
+    padding-bottom: 10%;
+  }
+  .hero-inside .btn-icons {
+    flex-direction: row;
+    margin-top: 0;
+  }
+  .hero-inside h1 {
+    font-size: 60px;
+    font-weight: bold;
+  }
+  .hero-inside h2 {
+    font-size: 30px;
+    font-weight: 400;
+  }
+  .hero-inside p {
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .hero-inside .circle-img {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background-color: transparent;
+    display: flex;
+    align-items: end;
+    margin: 0 2vw 0 auto;
+  }
+  .hero-inside .dev-container {
+    width: 100%;
+    max-width: 430px;
+    left: auto;
+  }
+  .hero-inside .primary-btn {
+    margin-right: 20px;
+  }
+}
+
+    </style>

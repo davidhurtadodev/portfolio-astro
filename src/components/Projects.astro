@@ -1,0 +1,122 @@
+---
+import { Image } from 'astro:assets';
+import splitterMobile from '../assets/images/splitter-mobile.png';
+import todoImg from '../assets/images/todo-app.png';
+import shorteningImg from '../assets/images/shortening.png';
+import trackerLaptop from '../assets/images/time-tracker-laptop.png';
+import spaceApp from '../assets/images/space-app.png';
+import myLibrary from '../assets/images/my-library.png';
+
+const projectsData = [
+  {
+    title: 'My Library',
+    info: `Fullstack app with an API REST made with Express, and it's frontend client made with React. Use of JSONWebToken for authentication.`,
+    img: myLibrary,
+    url: 'https://my-library.fly.dev/',
+    projectClass: 'library',
+    figure: 'triangle',
+    repo: 'https://github.com/davidhuertado/library-backend',
+  },
+  {
+    title: 'TODO App',
+    info: 'TODO app made with React and Typescript. It has dark theme and use localStorage',
+    img: todoImg,
+    url: 'https://incomparable-zuccutto-99f90c.netlify.app/',
+    projectClass: 'todo',
+    figure: 'circle',
+    repo: 'https://github.com/davidhuertado/todo-list-react',
+  },
+  {
+    title: 'Time Tracking Dashboard',
+    info: 'Tracking Dashboard made with React, class components and states',
+    img: trackerLaptop,
+    url: 'https://distracted-archimedes-a76d3e.netlify.app',
+    projectClass: 'time-tracking',
+    figure: 'square',
+    repo: 'https://github.com/davidhuertado/timeTrackingDashboard',
+  },
+  {
+    title: 'SpaceApp',
+    info: 'Space app made with React and React Router',
+    img: spaceApp,
+    url: 'https://sleepy-poincare-4948ea.netlify.app/',
+    projectClass: 'space-app',
+    figure: 'circle',
+    repo: 'https://github.com/davidhuertado/space-app',
+  },
+  {
+    title: 'Shortly',
+    info: 'Landing page of an app that allows to shortening URL. Made with React Hooks, sessionStorage and REST APi',
+    img: shorteningImg,
+    url: 'https://pedantic-perlman-6ce2c6.netlify.app/',
+    projectClass: 'shortly',
+    figure: 'triangle',
+    repo: 'https://github.com/davidhuertado/shortening-landing',
+  },
+  {
+    title: 'Splitter',
+    info: 'App that allows to calculate tips. Made with React',
+    img: splitterMobile,
+    url: 'https://affectionate-euler-2101cc.netlify.app/',
+    projectClass: 'splitter',
+    figure: 'circle',
+    repo: 'https://github.com/davidhuertado/tip-calculator',
+  },
+];
+ 
+---
+<section class="projects">
+    <h2>
+    Last <span class="underline">Projects</span>
+    </h2>
+  <slot />
+</section>
+
+
+<style>
+.projects {
+  text-align: center;
+  background: #212529;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: -10;
+  overflow: hidden;
+}
+
+.projects h2 {
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 120px;
+}
+.projects .underline {
+  position: relative;
+}
+.projects .underline::after {
+  content: '';
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #64644b;
+  bottom: -5px;
+  left: 0;
+}
+.project.pokemon {
+  margin-bottom: 0;
+}
+@media screen and (min-width: 992px) {
+  .projects {
+    padding-top: 200px;
+    padding-bottom: 150px;
+  }
+  .project-wrapper {
+    width: 90%;
+    max-width: 1150px;
+  }
+}    
+</style> 
+
+
+
