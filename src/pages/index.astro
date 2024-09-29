@@ -2,192 +2,76 @@
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Projects from '../components/Projects.astro';
-import fetchApi from '../lib/strapi';
-import splitterMobile from '../assets/images/splitter-mobile.png';
-import todoImg from '../assets/images/todo-app.png';
-import shorteningImg from '../assets/images/shortening.png';
-import trackerLaptop from '../assets/images/time-tracker-laptop.png';
-import spaceApp from '../assets/images/space-app.png';
-import myLibrary from '../assets/images/my-library.png';
-import Project from '../components/Project.astro'
-
-const projectsData = [
-  {
-    title: 'My Library',
-    info: `Fullstack app with an API REST made with Express, and it's frontend client made with React. Use of JSONWebToken for authentication.`,
-    img: myLibrary,
-    demoUrl: 'https://my-library.fly.dev/',
-    projectClass: 'library',
-    figure: 'triangle',
-    repoUrl: 'https://github.com/davidhuertado/library-backend',
-  },
-  {
-    title: 'TODO App',
-    info: 'TODO app made with React and Typescript. It has dark theme and use localStorage',
-    img: todoImg,
-    demoUrl: 'https://incomparable-zuccutto-99f90c.netlify.app/',
-    projectClass: 'todo',
-    figure: 'circle',
-    repoUrl: 'https://github.com/davidhuertado/todo-list-react',
-  },
-  {
-    title: 'Time Tracking Dashboard',
-    info: 'Tracking Dashboard made with React, class components and states',
-    img: trackerLaptop,
-    demoUrl: 'https://distracted-archimedes-a76d3e.netlify.app',
-    projectClass: 'time-tracking',
-    figure: 'square',
-    repoUrl: 'https://github.com/davidhuertado/timeTrackingDashboard',
-  },
-  {
-    title: 'SpaceApp',
-    info: 'Space app made with React and React Router',
-    img: spaceApp,
-    demoUrl: 'https://sleepy-poincare-4948ea.netlify.app/',
-    projectClass: 'space-app',
-    figure: 'circle',
-    repoUrl: 'https://github.com/davidhuertado/space-app',
-  },
-  {
-    title: 'Shortly',
-    info: 'Landing page of an app that allows to shortening URL. Made with React Hooks, sessionStorage and REST APi',
-    img: shorteningImg,
-    demoUrl: 'https://pedantic-perlman-6ce2c6.netlify.app/',
-    projectClass: 'shortly',
-    figure: 'triangle',
-    repoUrl: 'https://github.com/davidhuertado/shortening-landing',
-  },
-  {
-    title: 'Splitter',
-    info: 'App that allows to calculate tips. Made with React',
-    img: splitterMobile,
-    demoUrl: 'https://affectionate-euler-2101cc.netlify.app/',
-    projectClass: 'splitter',
-    figure: 'circle',
-    repoUrl: 'https://github.com/davidhuertado/tip-calculator',
-  },
-];
-
-
-
-
-const projects = await fetchApi({
-  endpoint: 'projects', // the content type to fetch
-  wrappedByKey: 'data', // the key to unwrap the response
-});
-
-
-
-
-
+import Project from '../components/Project.astro';
+import projectsData from '../lib/projectsData';
 ---
 
 <Layout title="David Hurtado">
-	<main>
-		<Hero />
-		<Projects >
-      { projectsData.map(
-     ({ title, img, info, demoUrl, projectClass, figure, repoUrl }, index) =>(
-      <Project title={title} img={img} info={info} demoUrl={demoUrl} projectClass={projectClass} figure={figure} repoUrl={repoUrl} index={index}/>
-     )
-    // {
-    //   return (
-    //      <div class={  title === 'Time Tracking Dashboard'
-    //       ? 'project-wrapper time-wrapper'
-    //       : 'project-wrapper'
-    //   }
-    // >
-    //   <span class={figure}></span>
-    //   <div
-    //     class={
-    //       index === 0 || index % 2 === 0
-    //         ? `project left ${projectClass}`
-    //         : `project right ${projectClass}`
-    //     }
-    //   >
-    //     <div class="img-container">
-    //       <Image src={img} alt="title" />
-    //     </div>
-    //     <div class="text-btn">
-    //       <div class="text-container">
-    //         <h4>{title}</h4>
-    //         <p>{info}</p>
-    //       </div>
-          
-    //       <div class="btn-container">
-    //         {demoUrl &&
-    //         <a href={demoUrl} target="_blank" rel="noreferrer">
-    //           <button type="button" class="demo">
-    //             Demo
-    //           </button>
-    //         </a>
-    //         }
-    //         {repoUrl &&
-    //         <a href={repoUrl} target="_blank" rel="noreferrer">
-    //           <button type="button" class="code">
-    //             <i class="fa-brands fa-github pointer"></i>Code
-    //           </button>
-    //         </a>
-    //         }
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-    //   );
-    // }
-  )
-}
-      </Projects>
-	</main>
+  <main>
+    <Hero />
+    <Projects>
+      {
+        projectsData.map(({ title, info, demoUrl, repoUrl, img }, index) => (
+          <Project
+            title={title}
+            img={img}
+            info={info}
+            demoUrl={demoUrl}
+            repoUrl={repoUrl}
+            index={index}
+          />
+        ))
+      }
+    </Projects>
+  </main>
 </Layout>
 
 <style is:global>
-	main {
-		z-index: -100;
-	}
-
-	* {
-  margin: 0;
-  padding: 0;
-  font-family: 'Open Sans', sans-serif;
-  color: #cecece;
-  box-sizing: border-box;
-}
-html {
-  scroll-behavior: smooth;
-}
-button {
-  cursor: pointer;
-}
-a {
-  text-decoration: none;
-}
-.pointer {
-  cursor: pointer;
-}
-.primary-btn {
-  border-radius: 4px;
-  border: solid 2px #cecece;
-  background-color: transparent;
-  text-transform: uppercase;
-  font-weight: 700;
-  font-size: 16px;
-  padding: 11px 20px;
-}
-.primary-btn:hover {
-  background: #cecece;
-  color: #64644b;
-}
-
-.fluid-img {
-  max-width: 100%;
-  height: auto;
-}
-
-@media screen and (min-width: 992px) {
-  .hide-lg {
-    display: none !important;
+  main {
+    z-index: -100;
   }
-}
 
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #cecece;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  button {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .primary-btn {
+    border-radius: 4px;
+    border: solid 2px #cecece;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 20px;
+  }
+  .primary-btn:hover {
+    background: #cecece;
+    color: #64644b;
+  }
+
+  .fluid-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  @media screen and (min-width: 992px) {
+    .hide-lg {
+      display: none !important;
+    }
+  }
 </style>

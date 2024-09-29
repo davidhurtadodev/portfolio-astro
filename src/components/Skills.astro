@@ -1,152 +1,133 @@
 ---
-
 import { Image } from 'astro:assets';
-import htmlLogo from '../assets/images/html.svg';
-import cssLogo from '../assets/images/css.svg';
-import bootstrapLogo from '../assets/images/bootstrap.svg';
-import reactLogo from '../assets/images/react.svg';
-import gitLogo from '../assets/images/git.svg';
-import typeScriptLogo from '../assets/images/typescript.svg';
-
-const skillsArray = [
-  { name: 'React', src: reactLogo },
-  { name: 'TypeScript', src: typeScriptLogo },
-  { name: 'PHP', src: htmlLogo },
-  { name: 'Wordpress', src: cssLogo },
-  { name: 'Next.js', src: bootstrapLogo },
-  { name: 'Tailwind CSS', src: gitLogo },
-];
-
-  // const renderedSkills = skillsArray.map(({ name, src }) => (
-  //    <div class="img-container tooltip top">
-  //     <span class="tiptext">{name}</span>
-  //     <Image class="skill-img" src={src} alt={name} />
-  //   </div>
-  // ))
-
+import skillsArray from '../lib/skills';
 ---
- 
+
 <div class="skills">
   <div class="title-span">
     <h2 class="hide-lg">Skills</h2>
     <span class="hide-lg underline"></span>
   </div>
-  <div class="skills-container">{
-  skillsArray.map(({ name, src }) => (
-     <div class="img-container tooltip top">
-      <span class="tiptext">{name}</span>
-      <Image class="skill-img" src={src} alt={name} />
-    </div>
-  ))}
+  <div class="skills-container">
+    {
+      skillsArray.map((tech) => {
+        if (tech)
+          return (
+            <div class="img-container tooltip top">
+              <span class="tiptext">{tech.name}</span>
+              {tech.src && (
+                <Image class="skill-img" src={tech.src} alt={tech.name} />
+              )}
+            </div>
+          );
+      })
+    }
   </div>
   <span class="end-line hide-lg"></span>
 </div>
 
-
 <style>
-
   .skills {
-  background-color: #212529;
-  padding-top: 50px;
-  padding: 45px 15px;
-}
-.skills-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  padding-top: 30px;
-}
-.skills .img-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.skills h2 {
-  text-transform: uppercase;
-  font-size: 24px;
-  font-weight: normal;
-  margin-bottom: 15px;
-  margin: 0 0 5px;
-}
-.skills .underline {
-  width: 73px;
-  height: 1px;
-  border-top: solid 3px #64644b;
-  margin: 0 auto;
-  display: block;
-}
-.skills .title-span {
-  text-align: center;
-}
-.skills .end-line {
-  display: block;
-  width: 100%;
-  height: 1px;
-  border-top: solid 1px #353c42;
-  margin: 70px auto 0;
-}
-@media screen and (min-width: 992px) {
+    background-color: #212529;
+    padding-top: 50px;
+    padding: 45px 15px;
+  }
   .skills-container {
-    grid-template-columns: repeat(9, 1fr);
-    padding: 0;
-    gap: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10%;
+    padding-top: 30px;
   }
-  .skills {
-    position: absolute;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
-    width: 80%;
+  .skills .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .skills h2 {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 15px;
+    margin: 0 0 5px;
+  }
+  .skills .underline {
+    width: 73px;
+    height: 1px;
+    border-top: solid 3px #64644b;
     margin: 0 auto;
-    left: 10vw;
-    top: 85%;
+    display: block;
   }
-}
-.tooltip {
-  position: relative;
-  /* display: inline-block; */
-}
-.tooltip .tiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  border-radius: 3px;
-  padding: 6px 0;
-  position: absolute;
-  z-index: 1;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-.tooltip .tiptext::after {
-  content: '';
-  position: absolute;
-  border-width: 5px;
-  border-style: solid;
-}
-.tooltip:hover .tiptext {
-  visibility: visible;
-}
-.tooltip.top .tiptext {
-  margin-left: -60px;
-  bottom: 110%;
-  left: 50%;
-}
-.tooltip.top .tiptext::after {
-  margin-left: -5px;
-  top: 100%;
-  left: 50%;
-  border-color: #000 transparent transparent transparent;
-}
-.skill-img {
-  opacity: 0.2;
-  max-width: 100%;
-  height: auto;
-}
-.tooltip:hover .skill-img {
-  opacity: 0.6;
-}
-
+  .skills .title-span {
+    text-align: center;
+  }
+  .skills .end-line {
+    display: block;
+    width: 100%;
+    height: 1px;
+    border-top: solid 1px #353c42;
+    margin: 70px auto 0;
+  }
+  @media screen and (min-width: 992px) {
+    .skills-container {
+      grid-template-columns: repeat(9, 1fr);
+      padding: 0;
+      gap: 2%;
+    }
+    .skills {
+      position: absolute;
+      box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      width: 80%;
+      margin: 0 auto;
+      left: 10vw;
+      top: 85%;
+    }
+  }
+  .tooltip {
+    position: relative;
+    /* display: inline-block; */
+  }
+  .tooltip .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    padding: 6px 0;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+  .tooltip .tiptext::after {
+    content: '';
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+  }
+  .tooltip:hover .tiptext {
+    visibility: visible;
+  }
+  .tooltip.top .tiptext {
+    margin-left: -60px;
+    bottom: 110%;
+    left: 50%;
+  }
+  .tooltip.top .tiptext::after {
+    margin-left: -5px;
+    top: 100%;
+    left: 50%;
+    border-color: #000 transparent transparent transparent;
+  }
+  .skill-img {
+    opacity: 0.2;
+    max-width: 100%;
+    height: auto;
+    max-height: 125px;
+    width: 100%;
+    transition: 0.5s;
+  }
+  .tooltip:hover .skill-img {
+    opacity: 0.6;
+  }
 </style>
-
-
-
