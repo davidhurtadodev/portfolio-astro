@@ -63,60 +63,56 @@ const projectsData = [
     repo: 'https://github.com/davidhuertado/tip-calculator',
   },
 ];
- 
 ---
-<section class="projects">
-    <h2>
+
+<section id="projects" class="projects">
+  <h2>
     Last <span class="underline">Projects</span>
-    </h2>
+  </h2>
   <slot />
 </section>
 
-
 <style>
-.projects {
-  text-align: center;
-  background: #212529;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: -10;
-  overflow: hidden;
-}
-
-.projects h2 {
-  text-transform: uppercase;
-  font-size: 32px;
-  font-weight: normal;
-  margin-bottom: 120px;
-}
-.projects .underline {
-  position: relative;
-}
-.projects .underline::after {
-  content: '';
-  position: absolute;
-  height: 3px;
-  width: 100%;
-  background: #64644b;
-  bottom: -5px;
-  left: 0;
-}
-.project.pokemon {
-  margin-bottom: 0;
-}
-@media screen and (min-width: 992px) {
   .projects {
-    padding-top: 200px;
-    padding-bottom: 150px;
+    text-align: center;
+    background: #212529;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: -10;
+    overflow: hidden;
   }
-  .project-wrapper {
-    width: 90%;
-    max-width: 1150px;
+
+  .projects h2 {
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 120px;
   }
-}    
-</style> 
-
-
-
+  .projects .underline {
+    position: relative;
+  }
+  .projects .underline::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #64644b;
+    bottom: -5px;
+    left: 0;
+  }
+  .project.pokemon {
+    margin-bottom: 0;
+  }
+  @media screen and (min-width: 992px) {
+    .projects {
+      padding-top: 200px;
+      padding-bottom: 150px;
+    }
+    .project-wrapper {
+      width: 90%;
+      max-width: 1150px;
+    }
+  }
+</style>
