@@ -37,6 +37,24 @@ const pages = [
       </nav>
     </header>
     <slot />
+    <script>
+      let lastScrollPosition = window.pageYOffset;
+
+      let header = document.querySelector('header');
+
+      document.addEventListener('scroll', (event) => {
+        const currentScrollPosition = window.pageYOffset;
+
+        if (lastScrollPosition < currentScrollPosition) {
+          header.classList.remove('fixed');
+          header.style.top = '-100px';
+        } else {
+          header.classList.add('fixed');
+          header.style.top = '0px';
+        }
+        lastScrollPosition = currentScrollPosition;
+      });
+    </script>
   </body>
 </html>
 
@@ -91,13 +109,16 @@ const pages = [
   header {
     padding: 15px 45px;
     position: fixed;
-    top: 0;
     z-index: 200;
     display: flex;
     justify-content: flex-end;
     width: 100%;
     background-color: #212529;
     border-bottom: solid 1px #cecece;
+    transition: all 0.2s ease-in-out;
+  }
+  header.fixed {
+    top: 0;
   }
   nav {
     display: flex;
