@@ -36,7 +36,9 @@ const pages = [
         }
       </nav>
     </header>
-    <slot />
+    <div class="page-container">
+      <slot />
+    </div>
     <script type="module" src="/scripts/fixedHeaderBehavior.js"></script>
   </body>
 </html>
@@ -56,6 +58,7 @@ const pages = [
 
   body {
     position: relative;
+    background-color: #212529;
   }
 
   html {
@@ -115,6 +118,10 @@ const pages = [
     &:hover {
       text-decoration: underline;
     }
+  }
+
+  .page-container {
+    padding-top: 50px;
   }
 
   @media screen and (min-width: 992px) {
