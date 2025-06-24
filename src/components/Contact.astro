@@ -55,7 +55,6 @@
     })
       .then(async (response) => {
         if (response.status == 200) {
-          debugger;
           formMessage.innerHTML = formMessageOptions.success;
           formMessage.classList.add('success');
         } else {
