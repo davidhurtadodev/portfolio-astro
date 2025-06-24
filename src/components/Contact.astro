@@ -1,0 +1,225 @@
+<h2><span class="underline">Contact</span></h2>
+<div class="contact">
+  <form method="POST" id="contactForm">
+    <input required type="hidden" name="access_key" value="5209e78e-6151-4079-bb9f-9dc451c33efa" />
+    <label
+      >Nombre
+      <input type="text" name="name" required />
+    </label>
+    <label
+      >Email
+      <input required type="email" name="email" required />
+    </label>
+    <label
+      >Mensaje
+      <textarea required name="message" required></textarea>
+    </label>
+
+    <label class="checkbox-label"
+      ><input required type="checkbox" /> Acepto que se traten mis datos para atender la solicitud de
+      información.
+    </label>
+    <span class="form-message"></span>
+    <div class="btn-container">
+      <button type="submit">Submit Form</button>
+    </div>
+
+    <div></div>
+  </form>
+</div>
+
+<script is:inline>
+  const contactForm = document.getElementById('contactForm');
+  const formApiUrl = 'https://api.web3forms.com/submit';
+  const formMessage = document.querySelector('.form-message');
+
+  const formMessageOptions = {
+    success: 'Success',
+    error: 'Error in submitting the form',
+  };
+
+  contactForm.addEventListener('submit', function (e) {
+    const formData = new FormData(contactForm);
+    e.preventDefault();
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    fetch(formApiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: json,
+    })
+      .then(async (response) => {
+        if (response.status == 200) {
+          formMessage.innerHTML = formMessageOptions.success;
+          formMessage.classList.add('success');
+        } else {
+          formMessage.innerHTML = formMessageOptions.error;
+          formMessage.classList.add('error');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+
+        formMessage.innerHTML = formMessageOptions.error;
+      })
+      .then(function () {
+        contactForm.reset();
+        setTimeout(() => {
+          formMessage.innerHTML = '';
+          formMessage.classList.remove('success', 'error');
+        }, 3000);
+      });
+  });
+</script>
+
+<style>
+  .checkbox-label {
+    font-size: 16px;
+    color: #212529;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 12px;
+    width: 100%;
+  }
+
+  .checkbox-label input {
+    width: fit-content;
+    -ms-transform: scale(1.5); /* IE */
+    -moz-transform: scale(1.5); /* FF */
+    -webkit-transform: scale(1.5); /* Safari and Chrome */
+    -o-transform: scale(1.5); /* Opera */
+    transform: scale(1.5);
+    padding: 10px;
+    margin-top: 3px;
+  }
+  .contact {
+    text-align: center;
+    background-color: #cecece;
+    max-width: 1220px;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding-top: 20px;
+  }
+  form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    border-radius: 5px;
+  }
+
+  label {
+    font-size: 16px;
+    color: #212529;
+    width: 100%;
+  }
+  .contact form {
+    text-align: left;
+    width: 90%;
+    max-width: 900px;
+    padding: 0px 20px;
+  }
+
+  input {
+    font-size: 16px;
+    font-family: inherit;
+    padding: 6px 10px;
+    border-radius: 10px;
+    border: solid 2px #212529;
+    margin-bottom: 20px;
+    width: 100%;
+    margin-top: 5px;
+    color: #212529;
+  }
+  textarea {
+    font-size: 16px;
+    font-family: inherit;
+    border-radius: 4px;
+    border: solid 2px #212529;
+    width: 100%;
+    max-width: 100%;
+    padding: 6px 10px;
+    min-height: 140px;
+    margin-bottom: 20px;
+    margin-top: 5px;
+    color: #212529;
+  }
+  button {
+    border-radius: 4px;
+    border: solid 2px #cecece;
+    background-color: #212529;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 20px;
+    margin-bottom: 20px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .form-message {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+
+    &.success {
+      color: green;
+    }
+    &.error {
+      color: red;
+    }
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: normal;
+    margin-bottom: 120px;
+    width: fit-content;
+    margin: 0 auto 40px;
+  }
+
+  .underline {
+    position: relative;
+  }
+  .underline::after {
+    content: '';
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #64644b;
+    bottom: -5px;
+    left: 0;
+  }
+
+  @media screen and (min-width: 992px) {
+    form {
+      width: 900px;
+      margin: 0 auto 100px;
+      border-radius: 15px;
+    }
+  }
+
+  @media screen and (min-width: 1350px) {
+    label {
+      font-size: 0.8em;
+    }
+  }
+</style>

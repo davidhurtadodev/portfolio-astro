@@ -4,6 +4,13 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+const pages = [
+  { title: 'Home', url: '/' },
+  { title: 'Projects', url: '/#projects' },
+  { title: 'Privacy Policy', url: '/policies/privacy' },
+  { title: 'Cookies Policy', url: '/policies/cookies' },
+];
 ---
 
 <!doctype html>
@@ -14,12 +21,118 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <script src="https://kit.fontawesome.com/324ae5e389.js" crossorigin="anonymous"></script>
+    <!-- Start cookieyes banner -->
     <script
-      src="https://kit.fontawesome.com/324ae5e389.js"
-      crossorigin="anonymous"></script>
+      id="cookieyes"
+      type="text/javascript"
+      src="https://cdn-cookieyes.com/client_data/e52304652b250af352950b46/script.js"></script>
+    <!-- End cookieyes banner -->
     <title>{title}</title>
   </head>
   <body>
-    <slot />
+    <header>
+      <nav>
+        {
+          pages.map(({ title, url }) => (
+            <a class="nav__links" href={url}>
+              {title}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+    <div class="page-container">
+      <slot />
+    </div>
+    <script type="module" src="/scripts/fixedHeaderBehavior.js"></script>
   </body>
 </html>
+
+<style is:global>
+  main {
+    z-index: -100;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: #cecece;
+    box-sizing: border-box;
+  }
+
+  body {
+    position: relative;
+    background-color: #212529;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  button {
+    cursor: pointer;
+  }
+  a {
+    text-decoration: none;
+  }
+  .pointer {
+    cursor: pointer;
+  }
+  .primary-btn {
+    border-radius: 4px;
+    border: solid 2px #cecece;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 20px;
+  }
+  .primary-btn:hover {
+    background: #cecece;
+    color: #64644b;
+  }
+
+  .fluid-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  header {
+    padding: 15px 45px;
+    position: fixed;
+    z-index: 200;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: #212529;
+    border-bottom: solid 1px #cecece;
+    transition: all 0.2s ease-in-out;
+  }
+  header.fixed {
+    top: 0;
+  }
+  nav {
+    display: flex;
+    column-gap: 20px;
+  }
+
+  .nav__links {
+    font-size: 16px;
+    cursor: pointer;
+    color: #cecece;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .page-container {
+    padding-top: 50px;
+  }
+
+  @media screen and (min-width: 992px) {
+    .hide-lg {
+      display: none !important;
+    }
+  }
+</style>
