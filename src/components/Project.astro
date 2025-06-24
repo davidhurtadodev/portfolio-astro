@@ -8,12 +8,8 @@ const figures = ['triangle', 'square'];
 ---
 
 <div class="project-wrapper">
-  <span
-    class={index % 2 === 0 ? figures[Math.floor(Math.random() * 2)] : 'circle'}
-  ></span>
-  <div
-    class={index === 0 || index % 2 === 0 ? `project left ` : `project right `}
-  >
+  <span class={index % 2 === 0 ? figures[Math.floor(Math.random() * 2)] : 'circle'}></span>
+  <div class={index === 0 || index % 2 === 0 ? `project left ` : `project right `}>
     {
       img && (
         <div class="img-container">
@@ -59,7 +55,7 @@ const figures = ['triangle', 'square'];
       background-color: #353c42;
       border-radius: 8px;
       width: 300px;
-      margin: 0 0 100px;
+      margin: 0 0 0px;
       z-index: 100;
     }
     .project-wrapper {
@@ -242,7 +238,7 @@ const figures = ['triangle', 'square'];
         /* width: 90%; */
         display: flex;
         justify-content: center;
-        margin: 0 0 130px;
+        margin: 0 0 50px;
         column-gap: 20px;
       }
       .project .img-container {
